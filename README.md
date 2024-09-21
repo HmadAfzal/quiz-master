@@ -4,7 +4,7 @@ A dynamic, interactive quiz application built with modern web technologies. This
 
 ![App Screenshot](/public/home.png)
 
-**Live Demo**: [Livelink]('https://quizmaster0.vercel.app/')
+**Live Demo**: 'https://quizmaster0.vercel.app/'
 
 
 ## Features
@@ -35,7 +35,7 @@ A dynamic, interactive quiz application built with modern web technologies. This
 1. **🌌 Clone the Repository:**
 
 ```bash
-
+https://github.com/HmadAfzal/quiz-master.git
 ```
 
 
@@ -75,7 +75,7 @@ The app will be avalible at http://localhost:3000,
 ![App Screenshot](/public/home.png)
 ![App Screenshot](/public/quiz.png)
 ![App Screenshot](/public/profile.png)
-![App Screenshot](//public/leaderboard.png)
+![App Screenshot](/public/leaderboard.png)
 
 
 
