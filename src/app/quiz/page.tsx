@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion} from "framer-motion";
 import confetti from "canvas-confetti";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,7 +37,7 @@ export default function QuizPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { toast } = useToast();
-  const { data: session, status } = useSession();
+  const { data: session} = useSession();
   const userId = session?.user?.id;
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -61,7 +61,7 @@ export default function QuizPage() {
         const response = await axios.get(
           `https://opentdb.com/api.php?amount=${n}&category=${c}&difficulty=${d}&type=${t}`
         );
-        const fetchedQuestions = response?.data.results.map((q: any) => ({
+        const fetchedQuestions = response?.data.results.map((q: Question) => ({
           ...q,
           question: he.decode(q.question), 
           correct_answer: he.decode(q.correct_answer),
@@ -271,6 +271,3 @@ export default function QuizPage() {
     </div>
   );
 }
-
-//animation
-//final test

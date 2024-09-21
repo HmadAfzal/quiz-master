@@ -4,7 +4,7 @@ declare module "next-auth" {
   interface Session {
     user: {
       id?: string;
-      email: String;
+      email: string;
       username: string;
       pfpUrl?: string;
     } & DefaultSession["user"];
@@ -12,7 +12,7 @@ declare module "next-auth" {
 
   interface User {
     id?: string;
-    email: String;
+    email: string;
     username: string;
     pfpUrl?: string;
   }
@@ -21,7 +21,7 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     id?: string;
-    email: String;
+    email: string;
     username: string;
     pfpUrl?: string;
   }

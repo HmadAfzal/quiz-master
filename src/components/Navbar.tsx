@@ -9,12 +9,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Moon, Sun, LogOut, Brain } from 'lucide-react'
+import { Moon, Sun, Brain } from 'lucide-react'
 import { signOut, useSession } from 'next-auth/react'
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme()
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
   
   const [mounted, setMounted] = useState(false)
 
