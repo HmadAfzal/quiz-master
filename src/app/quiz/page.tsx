@@ -81,7 +81,7 @@ export default function QuizPage() {
     };
   
     fetchQuestions();
-  }, [searchParams]);
+  }, [searchParams,c,d,t,n]);
   
 
   
