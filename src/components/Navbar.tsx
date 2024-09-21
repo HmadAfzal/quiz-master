@@ -1,5 +1,4 @@
-'use client'
-
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import { Button } from "@/components/ui/button"
@@ -15,8 +14,18 @@ import { signOut, useSession } from 'next-auth/react'
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme()
-const {data:session,status}=useSession()
-console.log(session,status)
+  const { data: session, status } = useSession()
+  
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
+
   return (
     <nav className="border-b">
       <div className="container mx-auto px-4 py-2 flex justify-between items-center">
@@ -45,11 +54,10 @@ console.log(session,status)
                 <Link href="/profile">Profile</Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href="/settings">Settings</Link>
+                <Link href="/leaderboard">Leader board</Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <button className="w-full text-left flex items-center"  onClick={() => signOut()}>
-                  <LogOut className="mr-2 h-4 w-4" />
+                <button className="w-full text-left flex items-center" onClick={() => signOut()}>
                   <span>Log out</span>
                 </button>
               </DropdownMenuItem>

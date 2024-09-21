@@ -8,14 +8,26 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  username  String   @unique
-  password  String
-  pfpUrl    String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String        @id @default(cuid())
+  email       String        @unique
+  username    String        @unique
+  password    String
+  pfpUrl      String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  GameHistory GameHistory[]
 }
 
+model GameHistory {
+  id             Int      @id @default(autoincrement())
+  date           DateTime @default(now())
+  score          Int
+  totalQuestions Int
+  category       String
+  difficulty     String
+  user           User     @relation(fields: [userId], references: [id])
+  userId         String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

@@ -39,7 +39,7 @@ export default function SignupForm() {
         description: response.data.message,
       });
 
-      router.replace('/login');
+      router.replace('/sign-in');
 
       setIsSubmitting(false);
     } catch (error) {
