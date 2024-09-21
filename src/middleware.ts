@@ -3,7 +3,7 @@ import { getToken } from 'next-auth/jwt';
 export { default } from 'next-auth/middleware';
 
 export const config = {
-  matcher: ['/', '/sign-in', '/sign-up'],
+  matcher: ['/', '/sign-in', '/sign-up', '/profile', '/leaderboard'],
 };
 
 export async function middleware(request: NextRequest) {
@@ -11,13 +11,15 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
 
   if (token) {
-    if (url.pathname === '/sign-in' || url.pathname === '/sign-up') {
+
+    if (['/sign-in', '/sign-up'].includes(url.pathname)) {
       return NextResponse.redirect(new URL('/', request.url));
     }
-    return NextResponse.next(); 
+    return NextResponse.next();
   }
 
-  if (!token && url.pathname === '/') {
+  const restrictedPaths = ['/', '/profile', '/leaderboard'];
+  if (!token && restrictedPaths.includes(url.pathname)) {
     return NextResponse.redirect(new URL('/sign-in', request.url));
   }
 
