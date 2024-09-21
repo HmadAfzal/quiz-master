@@ -38,7 +38,7 @@ const handleStartQuiz = async () => {
       transition={{ duration: 0.5 }}
     >
       
-      <Card className="w-full max-w-2xl mx-auto mb-8">
+      <Card className="w-full max-w-2xl mx-auto ">
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-center">Welcome to QuizMaster!</CardTitle>
           <CardDescription className="text-center">

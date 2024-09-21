@@ -11,6 +11,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Trophy, Medal, Award } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import { useSession } from 'next-auth/react'
+import Navbar from '@/components/Navbar'
 
 interface GameHistory {
   id: number
@@ -65,6 +66,9 @@ export default function UserProfilePage() {
   }
 
   return (
+    <>
+    <Navbar/>
+    
     <div className="min-h-screen bg-background p-8">
       <Card className="max-w-4xl mx-auto">
         <CardHeader className="text-center">
@@ -134,5 +138,6 @@ export default function UserProfilePage() {
         </CardFooter>
       </Card>
     </div>
+    </>
   )
 }

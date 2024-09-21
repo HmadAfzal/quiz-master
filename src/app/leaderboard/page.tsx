@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useToast } from '@/hooks/use-toast'
+import Navbar from '@/components/Navbar'
 
 interface LeaderboardEntry {
   id: string
@@ -53,6 +54,9 @@ export default function LeaderboardPage() {
   }
 
   return (
+    <>
+    <Navbar/>
+   
     <div className="min-h-screen bg-background p-8">
       <Card className="max-w-4xl mx-auto">
         <CardHeader>
@@ -100,5 +104,6 @@ export default function LeaderboardPage() {
         <Button onClick={() => router.push('/')}>Back to Home</Button>
       </div>
     </div>
+    </>
   )
 }
