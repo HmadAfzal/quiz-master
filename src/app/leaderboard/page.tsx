@@ -17,6 +17,7 @@ interface LeaderboardEntry {
   profilePicture: string
   totalScore: number
   gamesPlayed: number
+  avgScore: number
 }
 
 export default function LeaderboardPage() {
@@ -24,6 +25,7 @@ export default function LeaderboardPage() {
   const { toast } = useToast()
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [showAll, setShowAll] = useState(false) // For showing all players
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
@@ -45,6 +47,9 @@ export default function LeaderboardPage() {
     fetchLeaderboard()
   }, [toast])
 
+  // Show only top 10 initially
+  const displayedLeaderboard = showAll ? leaderboard : leaderboard.slice(0, 10)
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -55,55 +60,67 @@ export default function LeaderboardPage() {
 
   return (
     <>
-    <Navbar/>
-   
-    <div className="min-h-screen bg-background p-8">
-      <Card className="max-w-4xl mx-auto">
-        <CardHeader>
-          <CardTitle className="text-3xl font-bold text-center">Leaderboard</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-12">Rank</TableHead>
-                <TableHead>Player</TableHead>
-                <TableHead>Total Score</TableHead>
-                <TableHead>Games Played</TableHead>
-                <TableHead>Avg. Score</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {leaderboard.map((entry, index) => (
-                <motion.tr
-                  key={entry.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
-                >
-                  <TableCell className="font-medium">{index + 1}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center space-x-2">
-                      <Avatar className="h-8 w-8">
-                        <AvatarImage src={entry.profilePicture} alt={entry.username} />
-                        <AvatarFallback>{entry.username.slice(0, 2).toUpperCase()}</AvatarFallback>
-                      </Avatar>
-                      <span>{entry.username}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>{entry.totalScore}</TableCell>
-                  <TableCell>{entry.gamesPlayed}</TableCell>
-                  <TableCell>{(entry.totalScore / entry.gamesPlayed).toFixed(2)}</TableCell>
-                </motion.tr>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-      <div className="mt-8 flex justify-center">
-        <Button onClick={() => router.push('/')}>Back to Home</Button>
+      <Navbar />
+      <div className="min-h-screen bg-background p-8">
+        <Card className="max-w-4xl mx-auto">
+          <CardHeader>
+            <CardTitle className="text-3xl font-bold text-center">Leaderboard</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-12">Rank</TableHead>
+                  <TableHead>Player</TableHead>
+                  <TableHead>Total Score</TableHead>
+                  <TableHead>Games Played</TableHead>
+                  <TableHead>Avg. Score</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {displayedLeaderboard.map((entry, index) => (
+                  <motion.tr
+                    key={entry.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                  >
+                    <TableCell className="font-medium">{index + 1}</TableCell>
+                    <TableCell>
+                      <div className="flex items-center space-x-2">
+                        <Avatar className="h-8 w-8">
+                          <AvatarImage src={entry.profilePicture} alt={entry.username} />
+                          <AvatarFallback>{entry.username.slice(0, 2).toUpperCase()}</AvatarFallback>
+                        </Avatar>
+                        <span>{entry.username}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell>{entry.totalScore}</TableCell>
+                    <TableCell>{entry.gamesPlayed}</TableCell>
+                    <TableCell>{entry.avgScore.toFixed(2)}</TableCell>
+                  </motion.tr>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+
+        {/* Show More Button */}
+        {leaderboard.length > 10 && (
+          <div className="mt-4 flex justify-center">
+            {showAll ? (
+              <Button onClick={() => setShowAll(false)}>Show Less</Button>
+            ) : (
+              <Button onClick={() => setShowAll(true)}>Show More</Button>
+            )}
+          </div>
+        )}
+
+
+        <div className="mt-8 flex justify-center">
+          <Button onClick={() => router.push('/')}>Back to Home</Button>
+        </div>
       </div>
-    </div>
     </>
   )
 }

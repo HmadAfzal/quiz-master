@@ -55,7 +55,7 @@ export default function Navbar() {
                 <Link href="/profile">Profile</Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href="/leaderboard">Leader board</Link>
+                <Link href="/leaderboard">Leaderboard</Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <button className="w-full text-left flex items-center" onClick={() => signOut()}>

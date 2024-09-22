@@ -10,8 +10,9 @@ const Randomfacts = () => {
     useEffect(() => {
         const fetchRandomFacts = async () => {
             try {
-                const response = await axios.get('https://uselessfacts.jsph.pl/api/v2/facts/random')
-                setFunFact(response.data.text)
+                const response = await axios.get('https://catfact.ninja/fact')
+                console.log(response?.data)
+                setFunFact(response?.data.fact)
             } catch (error) {
                 console.log(error)
             }
