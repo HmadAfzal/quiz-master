@@ -4,7 +4,7 @@ A dynamic, interactive quiz application built with modern web technologies. This
 
 ![App Screenshot](/public/home.png)
 
-**Live Demo**: 'https://quizmaster0.vercel.app/'
+**Live Demo**: https://quizmaster0.vercel.app/
 
 
 ## Features
